@@ -108,7 +108,7 @@ class ResidualBlock_D(nn.Module):
         return out
 
 
-class NetS(nn.Module):
+class NetS(nn.Module): 
     def __init__(self, ngpu):
         super(NetS, self).__init__()
         self.ngpu = ngpu
@@ -299,32 +299,55 @@ class NetS(nn.Module):
 
             decoder1 = self.deconvblock1(encoder8)
             decoder1 = torch.cat([encoder7,decoder1],1)
-            decoder1 = F.upsample(decoder1, size = encoder6.size()[2:], mode='bilinear')
+            #decoder1 = F.upsample(decoder1, size = encoder6.size()[2:], mode='bilinear')
+            decoder1 = F.interpolate(decoder1, size=encoder6.size()[2:], mode='bilinear', align_corners=False)
+           
+          
+           
+            
+
+            
+
+            
             decoder2 = self.deconvblock2(decoder1)
             decoder2 = self.deconvblock2_1(decoder2) + decoder2
             # concatenate along depth dimension
             decoder2 = torch.cat([encoder6,decoder2],1)
-            decoder2 = F.upsample(decoder2, size = encoder5.size()[2:], mode='bilinear')
+            #decoder2 = F.upsample(decoder2, size = encoder5.size()[2:], mode='bilinear')
+            decoder2 = F.interpolate(decoder2, size=encoder5.size()[2:], mode='bilinear', align_corners=False)
+            
             decoder3 = self.deconvblock3(decoder2)
             decoder3 = self.deconvblock3_1(decoder3)
             decoder3 = torch.cat([encoder5,decoder3],1)
-            decoder3 = F.upsample(decoder3, size = encoder4.size()[2:], mode='bilinear')
-            decoder4 = self.deconvblock4(decoder3)
+            #decoder3 = F.upsample(decoder3, size = encoder4.size()[2:], mode='bilinear')
+            decoder3 = F.interpolate(decoder3, size=encoder4.size()[2:], mode='bilinear', align_corners=False)
+            
+            
+            decoder4 = self.deconvblock4(decoder3)            
             decoder4 = self.deconvblock4_1(decoder4)
             decoder4 = torch.cat([encoder4,decoder4],1)
-            decoder4 = F.upsample(decoder4, size = encoder3.size()[2:], mode='bilinear')
+            #decoder4 = F.upsample(decoder4, size = encoder3.size()[2:], mode='bilinear')
+            decoder4 = F.interpolate(decoder4, size=encoder3.size()[2:], mode='bilinear', align_corners=False)
+            
             decoder5 = self.deconvblock5(decoder4)
             decoder5 = self.deconvblock5_1(decoder5)
             decoder5 = torch.cat([encoder3,decoder5],1)
-            decoder5 = F.upsample(decoder5, size = encoder2.size()[2:], mode='bilinear')
+            #decoder5 = F.upsample(decoder5, size = encoder2.size()[2:], mode='bilinear')
+            decoder5 = F.interpolate(decoder5, size=encoder2.size()[2:], mode='bilinear', align_corners=False)
+            
             decoder6 = self.deconvblock6(decoder5)
             decoder6 = self.deconvblock6_1(decoder6)
             decoder6 = torch.cat([encoder2,decoder6],1)
-            decoder6 = F.upsample(decoder6, size = encoder1.size()[2:], mode='bilinear')
+            #decoder6 = F.upsample(decoder6, size = encoder1.size()[2:], mode='bilinear')
+            decoder6 = F.interpolate(decoder6, size=encoder1.size()[2:], mode='bilinear', align_corners=False)
+            
+            
             decoder7 = self.deconvblock7(decoder6)
             decoder7 = self.deconvblock7_1(decoder7)
             decoder7 = torch.cat([encoder1,decoder7],1)
-            decoder7 = F.upsample(decoder7, size = input.size()[2:], mode='bilinear')
+            #decoder7 = F.upsample(decoder7, size = input.size()[2:], mode='bilinear')
+            decoder7 = F.interpolate(decoder7, size=input.size()[2:], mode='bilinear', align_corners=False)
+            
             decoder8 = self.deconvblock8(decoder7)
             decoder8 = self.deconvblock8_1(decoder8)
             decoder9 = self.deconvblock9(decoder8)
