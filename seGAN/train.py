@@ -96,9 +96,9 @@ decay = opt.decay
 optimizerG = optim.Adam(NetS.parameters(), lr=lr, betas=(opt.beta1, 0.999))
 optimizerD = optim.Adam(NetC.parameters(), lr=lr, betas=(opt.beta1, 0.999))
 # load training data
-dataloader = loader(Dataset('./'),opt.batchSize)
+dataloader = loader(Dataset('/content/Wound-Segmentation/data/Foot Ulcer Segmentation Challenge/train'), opt.batchSize)
 # load testing data
-dataloader_val = loader(Dataset_val('./'), 36)
+dataloader_val = loader(Dataset_val('/content/Wound-Segmentation/data/Foot Ulcer Segmentation Challenge/validation'), 36)
 
 
 max_iou = 0
