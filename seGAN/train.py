@@ -103,6 +103,10 @@ dataloader_val = loader(Dataset_val('/content/Wound-Segmentation/data/Foot Ulcer
 
 max_iou = 0
 NetS.train()
+
+if cuda:
+    NetS = NetS.cuda()
+    
 for epoch in range(opt.niter):
     for i, data in enumerate(dataloader, 1):
         #train C
