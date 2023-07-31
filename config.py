@@ -5,16 +5,16 @@ from albumentations.pytorch import ToTensorV2
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 TRAIN_DIR = "/content/Wound-Segmentation/TrainingConcatImages"
 VAL_DIR = "/content/Wound-Segmentation/ValidationConcatImages"
-LEARNING_RATE = 2e-4
-BATCH_SIZE = 2
+LEARNING_RATE = 1e-5
+BATCH_SIZE = 1
 NUM_WORKERS = 2
 IMAGE_SIZE = 512
 CHANNELS_IMG = 3
-L1_LAMBDA = 100
+L1_LAMBDA = 200
 LAMBDA_GP = 10
 NUM_EPOCHS = 25
-LOAD_MODEL = False
-SAVE_MODEL = False
+LOAD_MODEL = True
+SAVE_MODEL = True
 CHECKPOINT_DISC = "disc.pth.tar"
 CHECKPOINT_GEN = "gen.pth.tar"
 
